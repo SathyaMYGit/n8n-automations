@@ -1,0 +1,686 @@
+{
+  "name": "KCP Real Estate Bolna Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "page": {
+          "__rl": true,
+          "value": "143984682126626",
+          "mode": "list",
+          "cachedResultName": "KCP Promoters India",
+          "cachedResultUrl": "https://facebook.com/143984682126626"
+        },
+        "form": {
+          "__rl": true,
+          "value": "1146123407361715",
+          "mode": "list",
+          "cachedResultName": "EttimadaiAugustLeads-copy"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.facebookLeadAdsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -960,
+        96
+      ],
+      "id": "e18a50c3-eb18-4e9e-b9d2-f99561a91b1b",
+      "name": "Facebook Lead Ads Trigger",
+      "webhookId": "ff2d9670-3972-4364-bb01-4f7bfe4b71f1",
+      "credentials": {
+        "facebookLeadAdsOAuth2Api": {
+          "id": "rU3XZpojHkS2hS6z",
+          "name": "Vapi FB App"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1CM79eS2mMY_YlLiaiy804qKbV1Li_PuIiNYivOFUjcA",
+          "mode": "list",
+          "cachedResultName": "Ettimadai Leads Tele calling",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1CM79eS2mMY_YlLiaiy804qKbV1Li_PuIiNYivOFUjcA/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1CM79eS2mMY_YlLiaiy804qKbV1Li_PuIiNYivOFUjcA/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $json.data.full_name }}",
+            "Phone": "={{ $json.data.phone }}",
+            "City": "={{ $json.data.city }}",
+            "Format Phone": "={{ $json.data.phone }}",
+            "How soon you will buy": "={{ $json.data['how_soon_do_you_want_to_buy?'] }}",
+            "When you like to visit": "={{ $json.data['when_you_like_to_visit_our_premium_farm_land_?'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "City",
+              "displayName": "City",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Format Phone",
+              "displayName": "Format Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "When you like to visit",
+              "displayName": "When you like to visit",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "How soon you will buy",
+              "displayName": "How soon you will buy",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Summary",
+              "displayName": "Summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Location",
+              "displayName": "Location",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Budget",
+              "displayName": "Budget",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Site Visit",
+              "displayName": "Site Visit",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Visit date",
+              "displayName": "Visit date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -768,
+        96
+      ],
+      "id": "9589d2a2-942d-4693-a4ef-f3af572c21bb",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ClTq4GWgECNH3A9Y",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.bolna.ai/call",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer bn-dbc15968d6d740a9835267f4d708e3a2"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"agent_id\": \"1d48f079-b0da-488d-afb8-6fb1c4b36153\",\n  \"recipient_phone_number\": \"{{ $json['Format Phone'] }}\",\n  \"callback_url\": \"https://n8n.srv931885.hstgr.cloud/webhook/16b9a9d0-09c4-4d91-afd1-1c0e41609081\",\n  \"callback_headers\": {\n    \"X-Webhook-Secret\": \"KCP!r3@l_Est4t3_#2025_v1\"\n  },\n  \"metadata\": {\n    \"phone\": \"{{ $json['Format Phone'] }}\",\n    \"name\": \"{{ $json.Name }}\"\n  },\n  \"variables\": {\n    \"lead_name\": \"{{ $json.Name }}\"\n  }\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -400,
+        128
+      ],
+      "id": "dfcb7bc9-45fb-437c-ba59-69b4263d1d56",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "16b9a9d0-09c4-4d91-afd1-1c0e41609081",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1088,
+        336
+      ],
+      "id": "c3dfcc2d-c327-404c-b796-bc9540e01454",
+      "name": "Webhook",
+      "webhookId": "16b9a9d0-09c4-4d91-afd1-1c0e41609081"
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $json.body || $json;\n\n// Extract phone (normalize to digits only so it matches Sheet1)\nconst rawPhone =\n  data.user_number ||\n  data.context_details?.recipient_phone_number ||\n  data.telephony_data?.to_number ||\n  \"\";\n\nconst phone = String(rawPhone).replace(/[^0-9]/g, \"\");\n\n// Extract summary\nconst summary = data.summary || \"\";\n\n// Parse nested custom_extractions safely\nlet extracted = {};\n\ntry {\n  let extra = data.custom_extractions;\n\n  // If it's a string, parse it once\n  if (typeof extra === \"string\") {\n    extra = JSON.parse(extra);\n  }\n\n  // Then parse user_requirements if present\n  if (extra?.user_requirements) {\n    let userReq = extra.user_requirements;\n\n    if (typeof userReq === \"string\") {\n      userReq = JSON.parse(userReq);\n    }\n\n    extracted = userReq;\n  }\n} catch (err) {\n  console.log(\"Error parsing custom_extractions:\", err);\n  extracted = {};\n}\n\n// Return clean JSON\nreturn [\n  {\n    phone: phone || \"\",\n    name: \"\",\n    location: extracted.location || \"\",\n    budget: extracted.budget || \"\",\n    site_visit: extracted.site_visit || \"\",\n    visit_date: extracted.visit_date || \"\",\n    summary: summary || \"\",\n  },\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -688,
+        336
+      ],
+      "id": "4af26b0f-ad26-442e-82f6-b88a343dece3",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "amount": 1,
+        "unit": "minutes"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -880,
+        336
+      ],
+      "id": "cb837dc3-1193-40e0-b790-9446cdd47cd7",
+      "name": "Wait",
+      "webhookId": "c09595ee-67c2-4d93-99dc-574e2bea7669"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1CM79eS2mMY_YlLiaiy804qKbV1Li_PuIiNYivOFUjcA",
+          "mode": "list",
+          "cachedResultName": "Ettimadai Leads Tele calling",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1CM79eS2mMY_YlLiaiy804qKbV1Li_PuIiNYivOFUjcA/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1CM79eS2mMY_YlLiaiy804qKbV1Li_PuIiNYivOFUjcA/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Phone": "={{ $json.phone }}",
+            "Location": "={{ $json.location }}",
+            "Summary": "={{ $json.summary }}",
+            "Budget": "={{ $json.budget }}",
+            "Site Visit": "={{ $json.site_visit }}",
+            "Visit date": "={{ $json.visit_date }}"
+          },
+          "matchingColumns": [
+            "Phone"
+          ],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "City",
+              "displayName": "City",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Format Phone",
+              "displayName": "Format Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "When you like to visit",
+              "displayName": "When you like to visit",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "How soon you will buy",
+              "displayName": "How soon you will buy",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Summary",
+              "displayName": "Summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Location",
+              "displayName": "Location",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Budget",
+              "displayName": "Budget",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Site Visit",
+              "displayName": "Site Visit",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Visit date",
+              "displayName": "Visit date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -480,
+        336
+      ],
+      "id": "41f5abb7-0408-4700-94d5-0b5cffb92bd9",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ClTq4GWgECNH3A9Y",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "fieldsToMatchString": "Phone",
+        "joinMode": "keepEverything",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "98445a4f-9485-49f1-a3b9-4e90ff542ffb",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1CM79eS2mMY_YlLiaiy804qKbV1Li_PuIiNYivOFUjcA",
+          "mode": "list",
+          "cachedResultName": "Ettimadai Leads Tele calling",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1CM79eS2mMY_YlLiaiy804qKbV1Li_PuIiNYivOFUjcA/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 707986869,
+          "mode": "list",
+          "cachedResultName": "Sheet2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1CM79eS2mMY_YlLiaiy804qKbV1Li_PuIiNYivOFUjcA/edit#gid=707986869"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Phone": "={{ $json[\"Phone\"] }}",
+            "City": "={{ $json[\"City\"] }}",
+            "Format Phone": "={{ $json[\"Format Phone\"] }}",
+            "When you like to visit": "={{ $json[\"When you like to visit\"] }}",
+            "How soon you will buy": "={{ $json[\"How soon you will buy\"] }}",
+            "Summary": "={{ $json[\"Summary\"] }}",
+            "Location": "={{ $json[\"Location\"] }}",
+            "Budget": "={{ $json[\"Budget\"] }}",
+            "Site Visit": "={{ $json[\"Site Visit\"] }}",
+            "Visit date": "={{ $json[\"Visit date\"] }}",
+            "Name": "={{ $json[\"Name\"] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "City",
+              "displayName": "City",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Format Phone",
+              "displayName": "Format Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "When you like to visit",
+              "displayName": "When you like to visit",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "How soon you will buy",
+              "displayName": "How soon you will buy",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Summary",
+              "displayName": "Summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Location",
+              "displayName": "Location",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Budget",
+              "displayName": "Budget",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Site Visit",
+              "displayName": "Site Visit",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Visit date",
+              "displayName": "Visit date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        336,
+        16
+      ],
+      "id": "3e261163-9d80-4180-8e8b-dbea9f40705f",
+      "name": "Append row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ClTq4GWgECNH3A9Y",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Facebook Lead Ads Trigger": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "9b755d6f-67a2-474c-b623-db53469387d1",
+  "meta": {
+    "instanceId": "1fddfba993d111941226bdf42733dca7aa6d2d26d3187915878b036862c6a037"
+  },
+  "id": "GruoqBixx5JkvLpA",
+  "tags": []
+}
